@@ -240,7 +240,19 @@
                     <button class="icon-btn"><i class="bi bi-bell"></i></button>
                     <button class="icon-btn"><i class="bi bi-people"></i></button>
                     <span class="user-badge ms-2">A</span>
-                    <button class="icon-btn"><i class="bi bi-gear"></i></button>
+                    <div class="dropdown">
+                        <button class="icon-btn dropdown-toggle" type="button" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-gear"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- Main Content -->
