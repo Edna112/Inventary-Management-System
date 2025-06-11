@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use Carbon\CarbonInterval;
+use Laravel\Passport\Passport;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Interfaces\ProductRepositoryInterface;
+use Illuminate\Container\Attributes\Auth;
+use App\Repositories\Classes\AuthRepository;
 use App\Repositories\Classes\ProductRepository;
 use App\Repositories\Interfaces\AuthRepositoryInterface;
-use App\Repositories\Classes\AuthRepository;
-use Illuminate\Container\Attributes\Auth;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-        }
+        Passport::tokensExpireIn(CarbonInterval::days(15));
+        Passport::refreshTokensExpireIn(CarbonInterval::days(30));
+        Passport::personalAccessTokensExpireIn(CarbonInterval::months(6));
     }
+}
 

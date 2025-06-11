@@ -3,9 +3,10 @@
 namespace App\Models;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 // use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -23,6 +24,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'is_active',
+        'last_login_at',
+        'phone',
+        'department',
+        'position',
+        'profile_photo',
+        'created_by',
+        'updated_by'
     ];
 
     /**
@@ -45,6 +55,29 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'last_login_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Check if user has a specific role
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    /**
+     * Check if user is active
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->is_active;
     }
 }
