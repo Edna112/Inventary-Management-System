@@ -49,13 +49,19 @@ class AuthController extends Controller
             'token' => $token,
         ]);
     }
+
+
     public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'User logged out successfully']);
     }
+
+
     public function user(Request $request) {
         return response()->json($request->user());
     }
+
+
     public function refreshToken(Request $request) {
         $user = $request->user();
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -64,6 +70,8 @@ class AuthController extends Controller
             'token' => $token,
         ]);
     }
+
+
     public function changePassword(Request $request) {
         $data = $request->validate([
             'current_password' => 'required|string',
@@ -81,6 +89,8 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Password changed successfully']);
     }
+
+
     public function updateProfile(Request $request) {
         $data = $request->validate([
             'name' => 'sometimes|string|max:255',
@@ -98,12 +108,16 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Profile updated successfully', 'user' => $user]);
     }
+
+
     public function deleteAccount(Request $request) {
         $user = $request->user();
         $user->tokens()->delete(); // Revoke all tokens
         $user->delete(); // Delete user
         return response()->json(['message' => 'Account deleted successfully']);
     }
+
+
     public function forgotPassword(Request $request) {
         $data = $request->validate([
             'email' => 'required|string|email',
@@ -119,6 +133,8 @@ class AuthController extends Controller
         // For simplicity, we will just return a success message
         return response()->json(['message' => 'Password reset link sent to your email']);
     }
+
+
     public function resetPassword(Request $request) {
         $data = $request->validate([
             'email' => 'required|string|email',
@@ -139,6 +155,8 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Password reset successfully']);
     }
+
+    
     public function verifyEmail(Request $request) {
         // This method would typically handle email verification logic
         // For simplicity, we will just return a success message

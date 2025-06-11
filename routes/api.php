@@ -15,7 +15,7 @@ use App\Http\Controllers\API\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -119,17 +119,17 @@ Route::prefix('v1')->group(function () {
     
 
 
+    // User Management Routes (Superadmin only)
+    Route::prefix('user')->middleware(['auth:api', 'superadmin'])->group(function () {
+        Route::post('/', [UserController::class, 'createUser']);
+        Route::get('/', [UserController::class, 'getUsers']);
+        Route::get('/{id}', [UserController::class, 'getUser']);
+        Route::put('/{id}', [UserController::class, 'updateUser']);
+        Route::delete('/{id}', [UserController::class, 'deleteUser']);
+        Route::post('/{id}/activate', [UserController::class, 'activateUser']);
+        Route::post('/{id}/deactivate', [UserController::class, 'deactivateUser']);
+    });
     
 });
 
-// User Management Routes (Superadmin only)
-Route::prefix('users')->middleware(['auth:sanctum', 'superadmin'])->group(function () {
-    Route::post('/', [UserController::class, 'createUser']);
-    Route::get('/', [UserController::class, 'getUsers']);
-    Route::get('/{id}', [UserController::class, 'getUser']);
-    Route::put('/{id}', [UserController::class, 'updateUser']);
-    Route::delete('/{id}', [UserController::class, 'deleteUser']);
-    Route::post('/{id}/activate', [UserController::class, 'activateUser']);
-    Route::post('/{id}/deactivate', [UserController::class, 'deactivateUser']);
-});
 
