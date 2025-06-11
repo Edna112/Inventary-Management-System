@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventary', function (Blueprint $table) {
+        Schema::create('inventory', function (Blueprint $table) {
             $table->id();
-            $table->string('notes')->nullable();
-            $table->string('name')->comment('Product name');
-            $table->foreignId('product_id')->constrained('product')->onDelete('cascade');
-            $table->decimal('price');
-            $table->foreignId('supplier_id')->constrained('supplier')->onDelete('cascade');
-            $table->decimal('quantity')->default(0)->comment('Available quantity in stock');
-           $table->created_at();
-           $table->updated_at();
+            // $table->string('notes')->nullable();
+            // $table->string('name')->comment('Product name');
+            // $table->foreignId('product_id')->constrained('product')->onDelete('cascade');
+            // $table->decimal('price');
+            // $table->foreignId('supplier_id')->constrained('supplier')->onDelete('cascade');
+            // $table->decimal('quantity')->default(0)->comment('Available quantity in stock');
+            // $table->created_at();
+            // $table->updated_at();
             $table->timestamps();
 
         });
