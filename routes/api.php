@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\Api\V1\AuthController;
+// use App\Http\Controllers\API\V1\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,17 +92,10 @@ Route::middleware(['auth:sanctum', 'superadmin'])->group(function () {
 Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
        
-        // Route::post('/login', [LoginController::class, 'login']);
-        
-        // Route::post('/reset-password', [ProfileController::class, 'resetPassword']);
-        // Route::post('/forgot-password', [ProfileController::class, 'forgotPassword']);
+        Route::post('/login', [AuthController::class, 'login']);
 
         Route::middleware('auth:api')->group(function () {
             
-            // Route::post('/logout', [LoginController::class, 'logout']);
-            // Route::get('/profile', [ProfileController::class, 'show']);
-            // Route::post('/profile', [ProfileController::class, 'update']);
-            // Route::post('/change-password', [ProfileController::class, 'changePassword']);
 
         });
     });
@@ -112,8 +107,6 @@ Route::prefix('v1')->group(function () {
 
         });
         
-       
-       
         
     });
     
