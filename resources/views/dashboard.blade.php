@@ -8,13 +8,135 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-        body { background: #f8f9fa; }
-        .sidebar { min-height: 100vh; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,0.03); }
-        .sidebar .nav-link { color: #333; }
-        .sidebar .nav-link.active { background: #e9ecef; font-weight: bold; }
-        .dashboard-cards .card { min-width: 180px; }
-        .chart-placeholder { background: #e9ecef; height: 220px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888; }
-        .pie-placeholder { background: #e9ecef; height: 180px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #888; }
+        :root {
+            --ims-primary: #0082C3;
+            --ims-accent: #E30613;
+            --ims-teal: #2CA6B0;
+            --ims-bg: #FFFFFF;
+            --ims-text: #222;
+        }
+        body { background: var(--ims-bg); color: var(--ims-text); }
+        .sidebar {
+            min-height: 100vh;
+            background: var(--ims-primary);
+            box-shadow: 2px 0 8px rgba(0,0,0,0.03);
+        }
+        .sidebar h5 { color: #fff; letter-spacing: 1px; }
+        .sidebar .nav-link {
+            color: #e3f4fb;
+            border-radius: 4px;
+            margin-bottom: 2px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
+            background: var(--ims-teal);
+            color: #fff;
+        }
+        .sidebar .collapse .nav-link {
+            color: #d0e8f6;
+            font-size: 0.97em;
+        }
+        .navbar {
+            background: var(--ims-bg) !important;
+            border-bottom: 2px solid var(--ims-primary);
+        }
+        .navbar .form-control {
+            border-radius: 20px;
+            border: 1px solid var(--ims-teal);
+        }
+        .navbar .btn-outline-secondary {
+            color: var(--ims-primary);
+            border-color: var(--ims-primary);
+        }
+        .navbar .btn-outline-secondary:hover {
+            background: var(--ims-primary);
+            color: #fff;
+        }
+        .navbar .badge.bg-primary {
+            background: var(--ims-accent) !important;
+            color: #fff;
+            font-size: 1em;
+        }
+        .navbar .btn-outline-danger {
+            border-radius: 20px;
+            border-color: var(--ims-accent);
+            color: var(--ims-accent);
+        }
+        .navbar .btn-outline-danger:hover {
+            background: var(--ims-accent);
+            color: #fff;
+        }
+        .dashboard-cards .card {
+            min-width: 180px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,130,195,0.07);
+        }
+        .dashboard-cards .card-body {
+            padding: 1.2rem 1rem;
+        }
+        .dashboard-cards .card h6 {
+            color: var(--ims-primary);
+            font-weight: 600;
+        }
+        .dashboard-cards .card h5 {
+            color: var(--ims-accent);
+            font-weight: 700;
+        }
+        .dashboard-cards .btn-primary {
+            background: var(--ims-primary);
+            border: none;
+        }
+        .dashboard-cards .btn-primary:hover {
+            background: var(--ims-teal);
+        }
+        .btn-group .btn {
+            border-radius: 20px !important;
+            color: var(--ims-primary);
+            border-color: var(--ims-primary);
+            background: #fff;
+        }
+        .btn-group .btn.active, .btn-group .btn:focus, .btn-group .btn:hover {
+            background: var(--ims-primary);
+            color: #fff;
+        }
+        .card {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,130,195,0.07);
+        }
+        .card h6 {
+            color: var(--ims-primary);
+            font-weight: 600;
+        }
+        .chart-placeholder {
+            background: #e9ecef;
+            height: 220px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.2em;
+        }
+        .pie-placeholder {
+            background: #e9ecef;
+            height: 180px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.1em;
+        }
+        .small span {
+            color: var(--ims-primary);
+            font-weight: 500;
+        }
+        @media (max-width: 991px) {
+            .sidebar { min-width: 60px; }
+            .sidebar h5, .sidebar .nav-link { font-size: 0.95em; }
+        }
     </style>
 </head>
 <body>
@@ -104,7 +226,7 @@
     <!-- Main Content -->
     <div class="flex-grow-1">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg shadow-sm">
             <div class="container-fluid">
                 <form class="d-flex me-3" style="width: 300px;">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -188,10 +310,10 @@
             <!-- Time Filter -->
             <div class="mb-3">
                 <div class="btn-group" role="group">
-                    <button class="btn btn-outline-primary">10 day</button>
-                    <button class="btn btn-outline-primary">week</button>
-                    <button class="btn btn-outline-primary">month</button>
-                    <button class="btn btn-outline-primary">year</button>
+                    <button class="btn">10 day</button>
+                    <button class="btn">week</button>
+                    <button class="btn">month</button>
+                    <button class="btn">year</button>
                 </div>
             </div>
 
