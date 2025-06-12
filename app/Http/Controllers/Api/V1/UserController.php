@@ -107,6 +107,7 @@ class UserController extends Controller
             200
         );
     }
+    
 
     /**
      * Delete a user.
@@ -126,6 +127,7 @@ class UserController extends Controller
 
         return $this->result_message('User deleted successfully', 200);
     }
+
 
     /**
      * Activate a user.
