@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -29,26 +33,82 @@ class AuthController extends Controller
         ], 201);
     }
 
-    
-    public function login(Request $request) {
-        $data = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
 
-        $user = User::where('email', $data['email'])->first();
+    public function login(Request $request)
+    {
+        try {
+            // Convert email to lowercase if it exists in the request
+            if ($request->has('email')) {
+                $request->merge(['email' => strtolower($request->input('email'))]);
+            }
 
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            // Log the incoming registration request.
+            Log::info('Login request received', ['user' => 'Anonymous']);
+
+            // Define custom error messages
+            $messages = [
+                'password.required' => 'Password is required.',
+                'email.string' => 'Email must be a string.',
+                'email.email' => 'Email must be a valid email address.',
+                'email.max' => 'Email must not exceed 255 characters.',
+            ];
+
+            // Validate the request
+            $validator = Validator::make($request->all(), [
+                'email' => 'string|email|max:255',
+                'password' => 'required|string',
+            ], $messages);
+
+            // Check if validation fails
+            if ($validator->fails()) {
+                Log::warning('Login failed due to validation errors.', ['errors' => $validator->errors()]);
+                $errors = $validator->errors();
+                if (!empty($errors)) {
+                    foreach ($errors->all() as $error) {
+                        return $this->result_fail(
+                            'Validation Error: ' . $error,
+                            412);
+                    }
+                }
+            }
+
+            if (!Auth::attempt($request->only('email', 'password'))) {
+                Log::warning('Invalid login attempt', ['email' => $request->email]);
+                return $this->result_fail(
+                    'Invalid login details.',
+                    401);
+            }
+
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+
+            // Update last login time
+            $user->last_login_at = Carbon::now();
+            $user->save();
+
+            Log::info('User logged in successfully', ['user' => $user]);
+            
+            // Generate token
+            $tokenResult = $user->createToken('Login');
+            $token = $tokenResult->accessToken;
+
+            // Return success response
+            return $this->result_ok(
+                'Login successful.',
+                [
+                    'token' => $token,
+                    'expires_at' => $tokenResult->token->expires_at,
+                    'user' => $user
+                ],
+                200);
+        } catch (\Exception $e) {
+            // Log the error and return response
+            Log::error("Error during login: " . $e->getMessage());
+            return $this->result_fail(
+                'An unexpected error occurred during login.',
+                500
+            );
         }
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'User logged in successfully',
-            'user' => $user,
-            'token' => $token,
-        ]);
     }
 
 
