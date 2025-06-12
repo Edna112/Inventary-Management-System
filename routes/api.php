@@ -113,7 +113,7 @@ Route::prefix('v1')->group(function () {
 
 
     // User Management Routes (Superadmin only)
-    Route::prefix('user')->middleware(['auth:api', 'superadmin'])->group(function () {
+    Route::prefix('user')->middleware(['auth:api', 'admin'])->group(function () {
         Route::post('/', [UserController::class, 'createUser']);
         Route::get('/', [UserController::class, 'getUsers']);
         Route::get('/{id}', [UserController::class, 'getUser']);
