@@ -7,6 +7,8 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Roboto Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --ims-primary: #0082C3;
@@ -15,7 +17,11 @@
             --ims-bg: #FFFFFF;
             --ims-text: #222;
         }
-        body { background: var(--ims-bg); color: var(--ims-text); }
+        body {
+            background: var(--ims-bg);
+            color: var(--ims-text);
+            font-family: 'Roboto', Arial, Helvetica, sans-serif;
+        }
         .sidebar {
             min-height: 100vh;
             background: var(--ims-primary);
