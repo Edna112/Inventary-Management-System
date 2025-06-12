@@ -4,10 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -31,11 +33,15 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
-            ], 422);
+            Log::warning('Registeration failed due to validation errors.', ['errors' => $validator->errors()]);
+            $errors = $validator->errors();
+            if (!empty($errors)) {
+                foreach ($errors->all() as $error) {
+                    return $this->result_fail(
+                        'Validation Error: ' . $error,
+                        412);
+                }
+            }
         }
 
         $user = User::create([
@@ -47,59 +53,31 @@ class UserController extends Controller
             'position' => $request->position,
             'phone' => $request->phone,
             'is_active' => $request->is_active ?? true,
-            'created_by' => Auth::id()
+            'created_by' => Auth::user()->id ?? null
         ]);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'data' => [
-                'user' => $user->makeHidden(['password'])
-            ]
-        ], 201);
+        Log::info('User created successfully.', ['user_id' => $user->id]);
+        return $this->result_ok(
+                'User registered and OTP sent to phone numbe.',
+                ['user' => $user], 
+                201
+            );
+        // return $this->result_ok(
+
+        //     [
+        //     'user' => $user->makeHidden(['password'])
+        // ], 'User created successfully');
+
+
+
+        // return $this->result_ok([
+        //     'user' => $user->makeHidden(['password'])
+        // ], 'User created successfully');
     }
 
-    /**
-     * Get all users.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getUsers()
-    {
-        $users = User::all()->makeHidden(['password']);
-        
-        return response()->json([
-            'status' => 'success',
-            'data' => [
-                'users' => $users
-            ]
-        ]);
-    }
 
-    /**
-     * Get a specific user.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getUser($id)
-    {
-        $user = User::find($id);
-        
-        if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
-        }
 
-        return response()->json([
-            'status' => 'success',
-            'data' => [
-                'user' => $user->makeHidden(['password'])
-            ]
-        ]);
-    }
+
 
     /**
      * Update a user.
@@ -113,10 +91,7 @@ class UserController extends Controller
         $user = User::find($id);
         
         if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
+            return $this->result_fail('User not found', 404);
         }
 
         $validator = Validator::make($request->all(), [
@@ -130,24 +105,19 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
-            ], 422);
+            return $this->result_fail('Validation Error', $validator->errors());
         }
 
         $user->update($request->all());
         $user->updated_by = Auth::id();
+        Log::info('User updated successfully.', ['user_id' => $user->id]);
         $user->save();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User updated successfully',
-            'data' => [
-                'user' => $user->makeHidden(['password'])
-            ]
-        ]);
+        return $this->result_ok(
+            'User updated successfully',
+            ['user' => $user->makeHidden(['password'])],
+            200
+        );
     }
 
     /**
@@ -161,18 +131,12 @@ class UserController extends Controller
         $user = User::find($id);
         
         if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
+            return $this->result_fail('User not found', 404);
         }
 
         $user->delete();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User deleted successfully'
-        ]);
+        return $this->result_message('User deleted successfully', 200);
     }
 
     /**
@@ -186,20 +150,15 @@ class UserController extends Controller
         $user = User::find($id);
         
         if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
+            return $this->result_fail('User not found', 404);
         }
 
         $user->is_active = true;
         $user->updated_by = Auth::id();
+        Log::info('User activated successfully.', ['user_id' => $user->id]);
         $user->save();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User activated successfully'
-        ]);
+        return $this->result_message('User activated successfully', 200);
     }
 
     /**
@@ -213,19 +172,13 @@ class UserController extends Controller
         $user = User::find($id);
         
         if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
+            return $this->result_fail('User not found', 404);
         }
 
         $user->is_active = false;
         $user->updated_by = Auth::id();
         $user->save();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User deactivated successfully'
-        ]);
+        return $this->result_message('User deactivated successfully', 200);
     }
 } 
