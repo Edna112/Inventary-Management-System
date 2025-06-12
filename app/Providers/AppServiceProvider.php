@@ -30,7 +30,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Passport::tokensExpireIn(CarbonInterval::days(15));
         Passport::refreshTokensExpireIn(CarbonInterval::days(30));
-        Passport::personalAccessTokensExpireIn(CarbonInterval::minutes(15));
+        Passport::personalAccessTokensExpireIn(CarbonInterval::seconds(15));
+        // Passport::personalAccessTokensExpireIn(CarbonInterval::minutes(15));
     }
 }
 
