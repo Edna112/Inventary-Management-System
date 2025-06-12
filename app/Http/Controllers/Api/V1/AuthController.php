@@ -111,10 +111,72 @@ class AuthController extends Controller
         }
     }
 
+    
+    /**
+     * @OA\Post(
+     *     path="/api/v1/auth/logout",
+     *     tags={"Authentication"},
+     *     summary="Logout user",
+     *     description="Revoke the user's access token and log them out",
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Logout successful",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Successfully logged out"),
+     *             @OA\Property(property="status", type="integer", example=200)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Unauthenticated"),
+     *             @OA\Property(property="status", type="integer", example=401)
+     *         )
+     *     )
+     * )
+     */
+    public function logout(Request $request)
+    {
+        try {
+            $user = $request->user();
+            
+            if ($user) {
 
-    public function logout(Request $request) {
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'User logged out successfully']);
+                $token = $request->user()->token();
+                // $accessTokenId = $request->user()->token()->id;
+    
+                // Revoke the token to log the user out
+                $token->revoke();
+
+                // Revoke the token that was used to authenticate the current request
+                // $user->currentAccessToken()->delete();
+                
+                Log::info('User logged out successfully', [
+                    'user_id' => $user->id,
+                    'email' => $user->email
+                ]);
+                
+                return $this->result_ok(
+                    'Successfully logged out',
+                    null,
+                    200
+                );
+            }
+
+        } catch (\Exception $e) {
+            Log::error('Logout failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return $this->result_fail(
+                'Logout failed',
+                $e->getMessage(),
+                500
+            );
+        }
     }
 
 
