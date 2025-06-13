@@ -4,6 +4,12 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="position: fixed; top: 20px; right: 20px; z-index: 1050; min-width: 300px;">
+                    <strong><i class="bi bi-check-circle-fill"></i> Success!</strong> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="card shadow-sm">
                 <div class="card-header bg-white border-bottom-0">
                     <h4 class="mb-0" style="font-family: 'Roboto', Arial, sans-serif; color: #0082C3;">Create User</h4>
