@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -48,7 +49,7 @@ class UserController extends Controller
             'position' => $validated['position'] ?? null,
             'phone' => $validated['phone'] ?? null,
             'is_active' => $request->has('is_active'),
-            'created_by' => auth()->id(),
+            'created_by' => Auth::user()->id ?? null,
         ];
 
         // Handle profile photo upload
