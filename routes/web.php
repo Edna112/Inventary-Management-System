@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -27,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    // User resource routes
+    Route::resource('users', UserController::class);
 });
 
 // Redirect root to login if not authenticated
