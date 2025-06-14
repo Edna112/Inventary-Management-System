@@ -37,11 +37,11 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-0">
+    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-0">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/dashboard') }}">IMS</a>
         </div>
-    </nav>
+    </nav> --}}
     <div class="d-flex">
         @yield('content')
     </div>

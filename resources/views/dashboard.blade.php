@@ -166,26 +166,108 @@
     <nav class="dashboard-sidebar px-3">
         <h5>Dashboard</h5>
         <ul class="nav flex-column">
+            <!-- Products Dropdown -->
             <li class="nav-item mb-2">
-                <a class="nav-link" href="#"><i class="bi bi-box-seam"></i> Products</a>
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#productsMenu" role="button" aria-expanded="false" aria-controls="productsMenu">
+                    <span><i class="bi bi-box-seam"></i> Products</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse" id="productsMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link" href="#">List Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Add Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Edit Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Delete Products</a></li>
+                    </ul>
+                </div>
             </li>
+            <!-- Users Dropdown -->
             <li class="nav-item mb-2">
-                <a class="nav-link" href="#"><i class="bi bi-person"></i> Users</a>
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#usersMenu" role="button" aria-expanded="false" aria-controls="usersMenu">
+                    <span><i class="bi bi-person"></i> Users</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse" id="usersMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link" href="#">View Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Add Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Edit Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Delete Users</a></li>
+                    </ul>
+                </div>
             </li>
+            <!-- Inventory Dropdown -->
             <li class="nav-item mb-2">
-                <a class="nav-link" href="#"><i class="bi bi-layers"></i> Inventory</a>
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#inventoryMenu" role="button" aria-expanded="false" aria-controls="inventoryMenu">
+                    <span><i class="bi bi-layers"></i> Inventory</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse" id="inventoryMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link" href="#">Stock List</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Purchase</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Supplier</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Return</a></li>
+                    </ul>
+                </div>
             </li>
+            <!-- POS Points Dropdown -->
             <li class="nav-item mb-2">
-                <a class="nav-link" href="#"><i class="bi bi-graph-up"></i> POS Points</a>
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#posMenu" role="button" aria-expanded="false" aria-controls="posMenu">
+                    <span><i class="bi bi-graph-up"></i> POS Points</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse" id="posMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link" href="#">View</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Edit</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Delete</a></li>
+                    </ul>
+                </div>
             </li>
+            <!-- Reports Dropdown -->
             <li class="nav-item mb-2">
-                <a class="nav-link" href="#"><i class="bi bi-bar-chart"></i> Reports</a>
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#reportsMenu" role="button" aria-expanded="false" aria-controls="reportsMenu">
+                    <span><i class="bi bi-bar-chart"></i> Reports</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse" id="reportsMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link" href="#">Sales Reports</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Inventory Reports</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">User Activity Reports</a></li>
+                    </ul>
+                </div>
             </li>
+            <!-- Accounts Dropdown -->
             <li class="nav-item mb-2">
-                <a class="nav-link" href="#"><i class="bi bi-wallet2"></i> Accounts</a>
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#accountsMenu" role="button" aria-expanded="false" aria-controls="accountsMenu">
+                    <span><i class="bi bi-wallet2"></i> Accounts</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse" id="accountsMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link" href="#">Invoices</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Expenses</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Add Expense</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Edit Expense</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Extract Invoice</a></li>
+                    </ul>
+                </div>
             </li>
+            <!-- Settings Dropdown -->
             <li class="nav-item mb-2">
-                <a class="nav-link" href="#"><i class="bi bi-gear"></i> Settings</a>
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#settingsMenu" role="button" aria-expanded="false" aria-controls="settingsMenu">
+                    <span><i class="bi bi-gear"></i> Settings</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse" id="settingsMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item"><a class="nav-link" href="#">General Settings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Notification Settings</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="dashboard-footer">© 2025</div>
