@@ -115,7 +115,7 @@
     <div class="d-flex">
         <!-- Sidebar -->
         <nav class="dashboard-sidebar px-3">
-            <h5>Dashboard</h5>
+            <h5><a href="{{ route('dashboard') }}" style="color: #222; text-decoration: none;">DASHBOARD</a></h5>
             <ul class="nav flex-column">
                 <!-- Products Dropdown -->
                 <li class="nav-item mb-2">

@@ -2,56 +2,6 @@
 
 @section('content')
 <style>
-    .dashboard-topbar {
-        background: #fff;
-        border-bottom: 1px solid #e5e7eb;
-        padding: 1rem 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-    .dashboard-search {
-        width: 350px;
-        border-radius: 8px;
-        border: 1px solid #e5e7eb;
-        background: #f8fafc;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-    }
-    .dashboard-topbar .icon-btn {
-        background: #f8fafc;
-        border: none;
-        border-radius: 50%;
-        width: 38px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 0.5rem;
-        color: #222;
-        font-size: 1.2rem;
-        transition: background 0.2s;
-    }
-    .dashboard-topbar .icon-btn:hover {
-        background: #e6f0fa;
-        color: #0082C3;
-    }
-    .dashboard-topbar .user-badge {
-        background: #222b45;
-        color: #fff;
-        border-radius: 50%;
-        width: 42px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 1.1rem;
-        margin-left: 0.5rem;
-    }
     .dashboard-main {
         background: #f8fafc;
         min-height: 100vh;
@@ -126,90 +76,74 @@
     }
     .pie-placeholder { height: 220px; }
 </style>
-<div class="flex-grow-1" style="min-width:0;">
-    <!-- Topbar -->
-    <div class="dashboard-topbar">
-        <form class="d-flex align-items-center" style="flex:1;">
-            <input class="dashboard-search" type="search" placeholder="Search..." aria-label="Search">
-            <button class="btn icon-btn" type="submit"><i class="bi bi-search"></i></button>
-        </form>
-        <div class="d-flex align-items-center">
-            <button class="icon-btn"><i class="bi bi-bell"></i></button>
-            <button class="icon-btn"><i class="bi bi-people"></i></button>
-            <span class="user-badge ms-2">A</span>
-            <button class="icon-btn"><i class="bi bi-gear"></i></button>
+<div class="dashboard-main">
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <div class="stat-card">
+                <div class="stat-label">Revenue</div>
+                <div class="stat-value">1,125 KTS</div>
+                <div class="stat-change up"><i class="bi bi-arrow-up-right"></i> 5.2%</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stat-card">
+                <div class="stat-label">Expenses</div>
+                <div class="stat-value">724.1 KTS</div>
+                <div class="stat-change down"><i class="bi bi-arrow-down-right"></i> 2.9%</div>
+            </div>
         </div>
     </div>
-    <!-- Main Content -->
-    <div class="dashboard-main">
-        <div class="row g-3 mb-3">
-            <div class="col-md-6">
-                <div class="stat-card">
-                    <div class="stat-label">Revenue</div>
-                    <div class="stat-value">1,125 KTS</div>
-                    <div class="stat-change up"><i class="bi bi-arrow-up-right"></i> 5.2%</div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="stat-card">
-                    <div class="stat-label">Expenses</div>
-                    <div class="stat-value">724.1 KTS</div>
-                    <div class="stat-change down"><i class="bi bi-arrow-down-right"></i> 2.9%</div>
-                </div>
+    <div class="d-flex align-items-center mb-3">
+        <div class="dashboard-tabs">
+            <button class="btn active">10 Day</button>
+            <button class="btn">Week</button>
+            <button class="btn">Month</button>
+            <button class="btn">Year</button>
+        </div>
+        <button class="btn btn-dark ms-auto" style="border-radius: 8px; font-weight: 500;">Sales Tracking</button>
+    </div>
+    <div class="d-flex stat-row mb-4">
+        <div class="stat-card border border-2 border-dark">
+            <div class="stat-label">Total Sales</div>
+            <div class="stat-value">850 KTS</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Orders</div>
+            <div class="stat-value">725</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Avg. Sale</div>
+            <div class="stat-value">125 KTS</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Total Products</div>
+            <div class="stat-value">123</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Top Selling Products</div>
+            <div class="stat-value">7 / 25</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Visitors</div>
+            <div class="stat-value">285</div>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <div class="chart-card">
+                <div class="fw-bold mb-2" style="font-size: 1.2rem;">Shopping Stats</div>
+                <div class="chart-placeholder">[Line Chart Placeholder]</div>
             </div>
         </div>
-        <div class="d-flex align-items-center mb-3">
-            <div class="dashboard-tabs">
-                <button class="btn active">10 Day</button>
-                <button class="btn">Week</button>
-                <button class="btn">Month</button>
-                <button class="btn">Year</button>
-            </div>
-            <button class="btn btn-dark ms-auto" style="border-radius: 8px; font-weight: 500;">Sales Tracking</button>
-        </div>
-        <div class="d-flex stat-row mb-4">
-            <div class="stat-card border border-2 border-dark">
-                <div class="stat-label">Total Sales</div>
-                <div class="stat-value">850 KTS</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Orders</div>
-                <div class="stat-value">725</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Avg. Sale</div>
-                <div class="stat-value">125 KTS</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Total Products</div>
-                <div class="stat-value">123</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Top Selling Products</div>
-                <div class="stat-value">7 / 25</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Visitors</div>
-                <div class="stat-value">285</div>
-            </div>
-        </div>
-        <div class="row g-3">
-            <div class="col-md-8">
-                <div class="chart-card">
-                    <div class="fw-bold mb-2" style="font-size: 1.2rem;">Shopping Stats</div>
-                    <div class="chart-placeholder">[Line Chart Placeholder]</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="chart-card">
-                    <div class="fw-bold mb-2" style="font-size: 1.2rem;">Users</div>
-                    <div class="pie-placeholder">[Pie Chart Placeholder]</div>
-                    <div class="mt-2 small">
-                        <span style="color:#0082C3;">Admin (35%)</span> &nbsp;
-                        <span style="color:#2CA6B0;">Retailers (20%)</span> &nbsp;
-                        <span style="color:#7C3AED;">Cashiers (39%)</span> &nbsp;
-                        <span style="color:#E30613;">Managers (6%)</span>
-                    </div>
+        <div class="col-md-4">
+            <div class="chart-card">
+                <div class="fw-bold mb-2" style="font-size: 1.2rem;">Users</div>
+                <div class="pie-placeholder">[Pie Chart Placeholder]</div>
+                <div class="mt-2 small">
+                    <span style="color:#0082C3;">Admin (35%)</span> &nbsp;
+                    <span style="color:#2CA6B0;">Retailers (20%)</span> &nbsp;
+                    <span style="color:#7C3AED;">Cashiers (39%)</span> &nbsp;
+                    <span style="color:#E30613;">Managers (6%)</span>
                 </div>
             </div>
         </div>
