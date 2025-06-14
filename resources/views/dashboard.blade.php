@@ -7,6 +7,8 @@
         min-height: 100vh;
         border-right: 1px solid #e5e7eb;
         padding-top: 2rem;
+        min-width: 260px;
+        max-width: 300px;
     }
     .dashboard-sidebar .nav-link {
         color: #222;
