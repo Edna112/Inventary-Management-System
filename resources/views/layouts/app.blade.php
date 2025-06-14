@@ -8,42 +8,175 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Roboto Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-        body { font-family: 'Roboto', Arial, Helvetica, sans-serif; background: #f8f9fa; }
-        .sidebar {
+        body { font-family: 'Roboto', Arial, Helvetica, sans-serif; background: #f8fafc; }
+        .dashboard-sidebar {
+            background: #f8fafc;
             min-height: 100vh;
-            background: #0082C3;
-            box-shadow: 2px 0 8px rgba(0,0,0,0.03);
+            border-right: 1px solid #e5e7eb;
+            padding-top: 2rem;
+            min-width: 260px;
+            max-width: 300px;
         }
-        .sidebar h5 { color: #fff; letter-spacing: 1px; }
-        .sidebar .nav-link {
-            color: #e3f4fb;
-            border-radius: 4px;
-            margin-bottom: 2px;
+        .dashboard-sidebar .nav-link {
+            color: #222;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
             transition: background 0.2s, color 0.2s;
         }
-        .sidebar .nav-link.active, .sidebar .nav-link:hover {
-            background: #2CA6B0;
-            color: #fff;
+        .dashboard-sidebar .nav-link.active, .dashboard-sidebar .nav-link:hover {
+            background: #e6f0fa;
+            color: #0082C3;
         }
-        .sidebar .collapse .nav-link {
-            color: #d0e8f6;
+        .dashboard-sidebar .nav-link i {
+            font-size: 1.2rem;
+        }
+        .dashboard-sidebar h5 {
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #222;
+            letter-spacing: 1px;
+        }
+        .dashboard-sidebar .nav-link.d-flex.justify-content-between.align-items-center {
+            cursor: pointer;
+        }
+        .dashboard-sidebar .collapse .nav-link {
+            color: #444;
             font-size: 0.97em;
         }
+        .dashboard-footer {
+            color: #888;
+            font-size: 0.95em;
+            margin-top: 2rem;
+            margin-left: 1rem;
+        }
         @media (max-width: 991px) {
-            .sidebar { min-width: 60px; }
-            .sidebar h5, .sidebar .nav-link { font-size: 0.95em; }
+            .dashboard-sidebar { min-width: 60px; }
+            .dashboard-sidebar h5, .dashboard-sidebar .nav-link { font-size: 0.95em; }
         }
     </style>
 </head>
 <body>
-    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-0">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/dashboard') }}">IMS</a>
-        </div>
-    </nav> --}}
     <div class="d-flex">
-        @yield('content')
+        <!-- Sidebar -->
+        <nav class="dashboard-sidebar px-3">
+            <h5>Dashboard</h5>
+            <ul class="nav flex-column">
+                <!-- Products Dropdown -->
+                <li class="nav-item mb-2">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#productsMenu" role="button" aria-expanded="false" aria-controls="productsMenu">
+                        <span><i class="bi bi-box-seam"></i> Products</span>
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+                    <div class="collapse" id="productsMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link" href="#">List Products</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Add Products</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Edit Products</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Delete Products</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Users Dropdown -->
+                <li class="nav-item mb-2">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#usersMenu" role="button" aria-expanded="false" aria-controls="usersMenu">
+                        <span><i class="bi bi-person"></i> Users</span>
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+                    <div class="collapse" id="usersMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link" href="#">View Users</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Add Users</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Edit Users</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Delete Users</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Inventory Dropdown -->
+                <li class="nav-item mb-2">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#inventoryMenu" role="button" aria-expanded="false" aria-controls="inventoryMenu">
+                        <span><i class="bi bi-layers"></i> Inventory</span>
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+                    <div class="collapse" id="inventoryMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link" href="#">Stock List</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Purchase</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Supplier</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Return</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- POS Points Dropdown -->
+                <li class="nav-item mb-2">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#posMenu" role="button" aria-expanded="false" aria-controls="posMenu">
+                        <span><i class="bi bi-graph-up"></i> POS Points</span>
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+                    <div class="collapse" id="posMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link" href="#">View</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Edit</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Add</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Reports Dropdown -->
+                <li class="nav-item mb-2">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#reportsMenu" role="button" aria-expanded="false" aria-controls="reportsMenu">
+                        <span><i class="bi bi-bar-chart"></i> Reports</span>
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+                    <div class="collapse" id="reportsMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link" href="#">Sales Reports</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Inventory Reports</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">User Activity Reports</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Accounts Dropdown -->
+                <li class="nav-item mb-2">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#accountsMenu" role="button" aria-expanded="false" aria-controls="accountsMenu">
+                        <span><i class="bi bi-wallet2"></i> Accounts</span>
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+                    <div class="collapse" id="accountsMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link" href="#">Invoices</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Expenses</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Add Expense</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Edit Expense</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Extract Invoice</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Settings Dropdown -->
+                <li class="nav-item mb-2">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#settingsMenu" role="button" aria-expanded="false" aria-controls="settingsMenu">
+                        <span><i class="bi bi-gear"></i> Settings</span>
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+                    <div class="collapse" id="settingsMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item"><a class="nav-link" href="#">General Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Notification Settings</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="dashboard-footer">© 2025</div>
+        </nav>
+        <!-- Main Content -->
+        <div class="flex-grow-1" style="min-width:0;">
+            @yield('content')
+        </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
