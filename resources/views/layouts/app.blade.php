@@ -55,6 +55,56 @@
             margin-top: 2rem;
             margin-left: 1rem;
         }
+        .dashboard-topbar {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .dashboard-search {
+            width: 350px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: #f8fafc;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+        }
+        .dashboard-topbar .icon-btn {
+            background: #f8fafc;
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            color: #222;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+        .dashboard-topbar .icon-btn:hover {
+            background: #e6f0fa;
+            color: #0082C3;
+        }
+        .dashboard-topbar .user-badge {
+            background: #222b45;
+            color: #fff;
+            border-radius: 50%;
+            width: 42px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: 0.5rem;
+        }
         @media (max-width: 991px) {
             .dashboard-sidebar { min-width: 60px; }
             .dashboard-sidebar h5, .dashboard-sidebar .nav-link { font-size: 0.95em; }
@@ -173,8 +223,22 @@
             </ul>
             <div class="dashboard-footer">© 2025</div>
         </nav>
-        <!-- Main Content -->
+        <!-- Main Content Area with Topbar -->
         <div class="flex-grow-1" style="min-width:0;">
+            <!-- Topbar -->
+            <div class="dashboard-topbar">
+                <form class="d-flex align-items-center" style="flex:1;">
+                    <input class="dashboard-search" type="search" placeholder="Search..." aria-label="Search">
+                    <button class="btn icon-btn" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+                <div class="d-flex align-items-center">
+                    <button class="icon-btn"><i class="bi bi-bell"></i></button>
+                    <button class="icon-btn"><i class="bi bi-people"></i></button>
+                    <span class="user-badge ms-2">A</span>
+                    <button class="icon-btn"><i class="bi bi-gear"></i></button>
+                </div>
+            </div>
+            <!-- Main Content -->
             @yield('content')
         </div>
     </div>
