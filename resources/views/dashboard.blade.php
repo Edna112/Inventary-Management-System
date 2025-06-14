@@ -56,7 +56,7 @@
         background: #f8fafc;
         border: none;
         border-radius: 50%;
-        width: 38px;
+        width: 42px;
         height: 38px;
         display: flex;
         align-items: center;
@@ -97,7 +97,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-width: 200px;
+        min-width: 240px;
         min-height: 110px;
     }
     .stat-card .stat-label {
@@ -131,7 +131,7 @@
         border-color: #0082C3;
     }
     .stat-row .stat-card {
-        min-width: 170px;
+        min-width: 210px;
         min-height: 90px;
         margin-bottom: 0;
         margin-right: 1rem;
@@ -274,7 +274,8 @@
         </ul>
         <div class="dashboard-footer">© 2025</div>
     </nav>
-    <div class="flex-grow-1">
+    <!-- Main Content -->
+    <div class="flex-grow-1" style="min-width:0;">
         <!-- Topbar -->
         <div class="dashboard-topbar">
             <form class="d-flex align-items-center" style="flex:1;">
