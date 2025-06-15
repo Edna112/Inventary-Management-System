@@ -12,7 +12,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // TODO: Return a view listing users
+        $users = \App\Models\User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
