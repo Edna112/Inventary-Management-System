@@ -5,7 +5,7 @@
     <h3 style="font-family: 'Roboto', Arial, sans-serif; color: #0082C3;">Edit User</h3>
     <div class="card shadow-sm">
         <div class="card-body p-4">
-            <form action="{{ route('users.update', $user->id) }}" method="POST">
+            <form action="{{ route('users.update', $user->id) }}" method="POST" id="editUserForm">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -46,4 +46,12 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('editUserForm').addEventListener('submit', function(event) {
+    if (!confirm('Are you sure you want to edit this user\'s details?')) {
+        event.preventDefault();
+    }
+});
+</script>
 @endsection 
