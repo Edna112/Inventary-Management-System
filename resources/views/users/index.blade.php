@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 style="font-family: 'Roboto', Arial, sans-serif; color: #0082C3;">Users</h3>
@@ -11,7 +12,7 @@
     <div class="card shadow-sm">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table id="usersTable" class="table table-hover align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             <th>Name</th>
@@ -56,4 +57,30 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#usersTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
+        responsive: true,
+        language: {
+            search: "<span class='fw-bold'>Search:</span>",
+            lengthMenu: "Show _MENU_ entries",
+            info: "Showing _START_ to _END_ of _TOTAL_ users",
+            paginate: {
+                previous: "<i class='bi bi-chevron-left'></i>",
+                next: "<i class='bi bi-chevron-right'></i>"
+            }
+        },
+        columnDefs: [
+            { orderable: false, targets: -1 }
+        ]
+    });
+});
+</script>
 @endsection 

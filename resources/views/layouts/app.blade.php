@@ -140,7 +140,8 @@
                     </a>
                     <div class="collapse" id="usersMenu">
                         <ul class="nav flex-column ms-3">
-                            <li class="nav-item"><a class="nav-link" href="#">View Users</a></li>
+                            {{-- <li class="nav-item"><a class="nav-link" href="#">View Users</a></li> --}}
+                            <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">View Users</a></li>
                             @php
                                 $user = Auth::user();
                             @endphp
