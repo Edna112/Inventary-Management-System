@@ -81,14 +81,14 @@
         <div class="col-md-6">
             <div class="stat-card">
                 <div class="stat-label">Revenue</div>
-                <div class="stat-value">1,125 KTS</div>
+                <div class="stat-value">1,125 FRS</div>
                 <div class="stat-change up"><i class="bi bi-arrow-up-right"></i> 5.2%</div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="stat-card">
                 <div class="stat-label">Expenses</div>
-                <div class="stat-value">724.1 KTS</div>
+                <div class="stat-value">724.1 FRS</div>
                 <div class="stat-change down"><i class="bi bi-arrow-down-right"></i> 2.9%</div>
             </div>
         </div>
@@ -105,7 +105,7 @@
     <div class="d-flex stat-row mb-4">
         <div class="stat-card border border-2 border-dark">
             <div class="stat-label">Total Sales</div>
-            <div class="stat-value">850 KTS</div>
+            <div class="stat-value">850 FRS</div>
         </div>
         <div class="stat-card">
             <div class="stat-label">Orders</div>
@@ -113,7 +113,7 @@
         </div>
         <div class="stat-card">
             <div class="stat-label">Avg. Sale</div>
-            <div class="stat-value">125 KTS</div>
+            <div class="stat-value">125 FRS</div>
         </div>
         <div class="stat-card">
             <div class="stat-label">Total Products</div>
