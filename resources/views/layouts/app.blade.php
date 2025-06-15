@@ -241,7 +241,7 @@
                     <button class="icon-btn"><i class="bi bi-people"></i></button>
                     <span class="user-badge ms-2">A</span>
                     <div class="dropdown">
-                        <button class="icon-btn dropdown-toggle" type="button" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="icon-btn" type="button" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-gear"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
