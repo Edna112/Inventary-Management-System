@@ -20,6 +20,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
         return view('users.create');
     }
 
@@ -28,6 +31,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',

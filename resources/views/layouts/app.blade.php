@@ -141,7 +141,12 @@
                     <div class="collapse" id="usersMenu">
                         <ul class="nav flex-column ms-3">
                             <li class="nav-item"><a class="nav-link" href="#">View Users</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Add Users</a></li>
+                            @php
+                                $user = Auth::user();
+                            @endphp
+                            @if($user && $user->role === 'admin')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Add Users</a></li>
+                            @endif
                             <li class="nav-item"><a class="nav-link" href="#">Edit Users</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Delete Users</a></li>
                         </ul>
