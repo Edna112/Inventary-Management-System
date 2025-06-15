@@ -84,6 +84,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if (Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
         $user = User::findOrFail($id);
         return view('users.edit', compact('user'));
     }
@@ -93,6 +96,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -110,6 +116,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // TODO: Handle deleting a user
+        if (Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 } 

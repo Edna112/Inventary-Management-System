@@ -59,7 +59,11 @@
                                 <td>
                                     @if(Auth::user() && Auth::user()->role === 'admin')
                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                                        <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <a href="#" class="btn btn-sm btn-outline-danger" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this user?')) { document.getElementById('delete-form-{{ $user->id }}').submit(); }">Delete</a>
+                                        <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     @endif
                                 </td>
                             </tr>
