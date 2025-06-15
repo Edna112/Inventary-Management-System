@@ -51,7 +51,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
                                     <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
                                 </td>
                             </tr>

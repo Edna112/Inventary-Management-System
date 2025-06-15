@@ -148,7 +148,7 @@
                             @if($user && $user->role === 'admin')
                                 <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Add Users</a></li>
                             @endif
-                            <li class="nav-item"><a class="nav-link" href="#">Edit Users</a></li>
+                            {{-- <li class="nav-item"><a class="nav-link" href="{{ route('users.edit') }}">Edit Users</a></li> --}}
                             <li class="nav-item"><a class="nav-link" href="#">Delete Users</a></li>
                         </ul>
                     </div>

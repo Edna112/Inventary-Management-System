@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -83,7 +84,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // TODO: Show edit form for a user
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -91,7 +93,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // TODO: Handle updating a user
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->department = $request->department;
+        $user->position = $request->position;
+        $user->phone = $request->phone;
+        $user->is_active = $request->has('is_active');
+        $user->save();
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
     /**
