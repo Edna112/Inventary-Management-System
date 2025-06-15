@@ -12,6 +12,12 @@
     }
 </style>
 <div class="container mt-4">
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 style="font-family: 'Roboto', Arial, sans-serif; color: #0082C3;">Users</h3>
         @if(Auth::user() && Auth::user()->role === 'admin')
