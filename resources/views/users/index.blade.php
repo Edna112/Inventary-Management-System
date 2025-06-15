@@ -2,6 +2,15 @@
 
 @section('content')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<style>
+    .table th, .table td {
+        padding: 1rem 1rem !important;
+    }
+    .table {
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+</style>
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 style="font-family: 'Roboto', Arial, sans-serif; color: #0082C3;">Users</h3>
@@ -10,7 +19,7 @@
         @endif
     </div>
     <div class="card shadow-sm">
-        <div class="card-body p-0">
+        <div class="card-body p-4">
             <div class="table-responsive">
                 <table id="usersTable" class="table table-hover align-middle mb-0">
                     <thead class="table-light">
